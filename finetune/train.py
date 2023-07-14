@@ -201,6 +201,8 @@ Compute metrics used for huggingface trainer.
 """
 def compute_metrics(eval_pred):
     logits, labels = eval_pred
+    if isinstance(logits, tuple):  # Unpack logits if it's a tuple
+        logits = logits[0]
     return calculate_metric_with_sklearn(logits, labels)
 
 
